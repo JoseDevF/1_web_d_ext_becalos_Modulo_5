@@ -21,6 +21,10 @@ h1 {
     font-size: 2rem;
 }
 
+ul {
+    list-style: none;
+}
+
 form {
     display: flex;
     gap: 0.5rem;

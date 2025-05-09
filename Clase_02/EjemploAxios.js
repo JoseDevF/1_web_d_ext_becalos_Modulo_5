@@ -90,7 +90,14 @@ function filtrarProductosPorCategoria(categoria, error, products) {
 }
 
 //obtenerProductosPorCategoria('jewelery', filtrarProductosPorCategoria)
-obtenerProductosPorCategoria('jewelery', () => { })
+obtenerProductosPorCategoria('jewelery', (categoria, error, products) => {
+    if (error) {
+        console.error('Error: ', error.message)
+    } else {
+        const productosCat = products.filter(product => product.category === categoria)
+        console.warn(productosCat)
+    }
+})
 
 
 /* CALLBACK HELL */
