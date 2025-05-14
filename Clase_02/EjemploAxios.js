@@ -67,7 +67,7 @@ const nuevoProducto = {
     image: "https://dummy.com"
 }
 /* Creamos un producto nuevo */
-/* guardarProductoNuevo(nuevoProducto, callbackNuevoProd); */
+guardarProductoNuevo(nuevoProducto, callbackNuevoProd);
 
 
 
