@@ -2,39 +2,37 @@ import axios from 'axios'
 /* Este MODULO que maneja todo el estado de la aplicación, concentra la funcionalidad para manipular datos */
 const BASE_URL_API = "http://localhost:3005/api";
 
-function callback(error, todos) {
-    if (error) {
-        console.error('Error: ', error.message)
-    } else {
-        /* todos.forEach(todo => {
-            console.log(`Listado de todos: ${todo.id} ${todo.task} - ${todo.dueDate}`);
-        }); */
-        return todos;
+
+export const getTodos = async () => {
+
+    try {
+        const todos = await axios.get(`${BASE_URL_API}/todos`)
+        console.log("llamada axios", todos)
+        return todos.data;
+    } catch (err) {
+        console.log("Error al obtener los TODOs:", err);
+        return []
     }
 }
 
-export const getTodos = () => {
-
-    let todosArray = []
-    axios.get(`${BASE_URL_API}/todos`)
-        .then(respuesta => todosArray = callback(null, respuesta.data))
-        .catch(error => callback(error, null))
-        .finally(() => { return todosArray })
-    //return JSON.parse(todos_list ?? "[]");
-
-    //return todosArray;
-}
-
-export const todos = getTodos()
+/* export const todos = getTodos() */
 //todos();
-console.log(todos);
+/* console.log(todos) */
 
 /* addTodo */
 /* Ejecutar función para añadir un nuevo pendiente, a un listado de pendientes y si es a traves de API, llamar a la API con un POST para crear. */
-export function addTodo(item) {
+export async function addTodo(item) {
     //const todos = getTodos()
-    todos.push({ ...item, done: false });
-    persist();
+
+    /* todos.push({ ...item, done: false });
+    persist(); */
+    try {
+        const response = await axios.post(`${BASE_URL_API}/todos`, { ...item, done: 0 })
+        return response.data;
+    } catch (err) {
+        console.log("Error al crear el TODO :", err);
+        return {}
+    }
 }
 
 export function toggleDone(index) {
@@ -49,6 +47,6 @@ export function removeTodo(index) {
     persist();
 }
 
-function persist() {
+/* function persist() {
     localStorage.setItem("todos", JSON.stringify(todos));
-}
+} */
